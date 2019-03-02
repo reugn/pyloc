@@ -1,6 +1,11 @@
 ### PYLOC
 Python implementation of tool for counting lines of code.
 
+#### Installation
+```
+pip install -U git+https://github.com/reugn/pyloc.git
+```
+
 #### Usage
 pyloc --help
 ```
