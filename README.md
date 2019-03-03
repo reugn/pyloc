@@ -1,12 +1,14 @@
-### PYLOC
+## pyloc
+[![](https://img.shields.io/badge/python-3.5+-blue.svg)]()
+
 Python implementation of tool for counting lines of code.
 
-#### Installation
+### Installation
 ```
 pip install -U git+https://github.com/reugn/pyloc.git
 ```
 
-#### Usage
+### Usage
 pyloc --help
 ```
 usage: pyloc [options]
