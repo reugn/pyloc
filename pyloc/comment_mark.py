@@ -4,31 +4,23 @@ __all__ = ['CMT', 'CommentMark']
 
 
 class CMT(Enum):
-    """
-    Single line comment symbol
-    """
+    """Comment symbols Enum"""
+
+    # Single line comment symbol
     SINGLE_LINE = 1
 
-    """
-    Block comment opening symbol
-    """
+    # Block comment opening symbol
     BLOCK_OPEN = 2
 
-    """
-    Block comment closing symbol
-    """
+    # Block comment closing symbol
     BLOCK_CLOSE = 3
 
-    """
-    Doc comment opening symbol
-    Requires first character of a line positioning
-    """
+    # Doc comment opening symbol
+    # Requires first character of a line positioning
     DOC_OPEN = 4
 
-    """
-    Doc comment closing symbol
-    Requires first character of a line positioning
-    """
+    # Doc comment closing symbol
+    # Requires first character of a line positioning
     DOC_CLOSE = 5
 
 
@@ -36,6 +28,7 @@ class CommentMark:
 
     @classmethod
     def getByExt(cls, ext) -> dict:
+        """return comment symbols by file extension"""
         return cls.__mark_list.get(ext)
 
     __empty_list = {}
@@ -50,9 +43,7 @@ class CommentMark:
         CMT.BLOCK_CLOSE: "*/",
     }
 
-    """
-    Supported file extensions list
-    """
+    # Supported file extensions list
     __mark_list = {
         "py": {
             CMT.SINGLE_LINE: ["#"],
