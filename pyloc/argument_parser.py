@@ -1,6 +1,8 @@
 import logging
 from argparse import ArgumentParser
 
+from pyloc.writer import Writer
+
 
 class PylocArgumentParser(ArgumentParser):
 
@@ -12,6 +14,13 @@ class PylocArgumentParser(ArgumentParser):
         super().add_argument("-s", "--sort", default='files',
                              choices=['files', 'comment', 'code', 'blank'],
                              help="sort results by field")
+        super().add_argument("-o", "--out", default='table',
+                             choices=self._get_formats(),
+                             help="output format")
+
+    @staticmethod
+    def _get_formats() -> list:
+        return [cls.type() for cls in Writer.__subclasses__()]
 
 
 class Args(object):
@@ -39,8 +48,12 @@ class Args(object):
         extended = ["./" + f for f in lines if not f.startswith("./")]
         return lines + extended + ["./.git"]
 
-    def sort(self, _list) -> list:
+    def _sort(self, _list) -> list:
         return sorted(_list, key=lambda x: x[self._sort_by], reverse=True)
+
+    def prepare(self, data) -> str:
+        _sorted = self._sort(data)
+        return self._writer.prepare(_sorted, self.headers)
 
     def parse_flags(self):
         flags = self._arg_parser.parse_args()
@@ -53,3 +66,5 @@ class Args(object):
                 self._logger.warning("No .gitignore file found")
         self.dir = flags.path
         self._sort_by = list(map(lambda x: x.lower(), self.headers)).index(flags.sort)
+        self._writer = filter(lambda cls: cls.type() == flags.out,
+                              Writer.__subclasses__()).__next__()()

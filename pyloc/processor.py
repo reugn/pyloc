@@ -4,8 +4,6 @@ import os
 from collections import defaultdict
 from fnmatch import fnmatch
 
-from tabulate import tabulate
-
 from pyloc.argument_parser import Args
 from pyloc.file_handler import FileDetails, FileHandler
 
@@ -35,9 +33,7 @@ class Processor(object):
         for k, v in merged.items():
             grouped.append([k] + v)
 
-        _sorted = self._args.sort(grouped)
-
-        return tabulate(_sorted, headers=self._args.headers, tablefmt="grid")
+        return self._args.prepare(grouped)
 
     def __read_parallel(self, file_names):
         with concurrent.futures.ThreadPoolExecutor() as executor:
