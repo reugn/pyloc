@@ -42,7 +42,7 @@ def find_meta(meta):
 
 setup(
     name=NAME,
-    version='0.1.0',
+    version='0.2.0',
     description='tool for counting lines of code',
     long_description=readme(),
     classifiers=CLASSIFIERS,

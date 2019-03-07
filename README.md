@@ -14,12 +14,15 @@ pyloc --help
 usage: pyloc [options]
 
 positional arguments:
-  path              working directory
+  path                  working directory
 
 optional arguments:
-  -h, --help        show this help message and exit
-  -gi, --gitignore  filter sources by .gitignore file
-
+  -h, --help            show this help message and exit
+  -gi, --gitignore      filter sources by .gitignore file
+  -s {files,comment,code,blank}, --sort {files,comment,code,blank}
+                        sort results by field
+  -o {table,json}, --out {table,json}
+                        output format
 ```
 
 Simple example
